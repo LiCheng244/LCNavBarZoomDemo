@@ -19,12 +19,16 @@ NSString *const cellID = @"cellID";
 
 @implementation LCHeaderController {
 
-    UIView *_headerView;
-    UIImageView *_headerImgView;
+    UIView              *_headerView;
+    UIImageView         *_headerImgView;
+    UIView              *_lineView;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+
+    // 取消自动布局
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
     // 隐藏导航条
     [self.navigationController setNavigationBarHidden:YES];
@@ -49,22 +53,27 @@ NSString *const cellID = @"cellID";
 /** 设置 headerView */
 - (void)setupHeaderView {
 
+    // 1. headerView
     _headerView = [[UIView alloc] initWithFrame:(CGRectMake(0, 0, self.view.bounds.size.width, headerHeight))];
-    _headerView.backgroundColor = [UIColor redColor];
-
+    _headerView.backgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1];
     [self.view addSubview:_headerView];
 
-    // 头像视图
+    // 2. 头像视图
     _headerImgView = [[UIImageView alloc] initWithFrame:_headerView.bounds];
     _headerImgView.image = [UIImage imageNamed:@"111.jpg"];
     _headerImgView.backgroundColor = [UIColor grayColor];
-
-    // 设置图像缩放方式 - 等比例填充
+    //    - 设置图像缩放方式 - 等比例填充
     _headerImgView.contentMode = UIViewContentModeScaleAspectFill;
-    // 设置图片剪裁
-//    _headerImgView.clipsToBounds = YES;
-
+    //    - 设置图片剪裁
+    _headerImgView.clipsToBounds = YES;
     [_headerView addSubview:_headerImgView];
+
+    // 3. 分割线
+    CGFloat lineHeight = 1 / [UIScreen mainScreen].scale;
+    _lineView = [[UIView alloc] initWithFrame:(CGRectMake(0, headerHeight - lineHeight, self.view.bounds.size.width, lineHeight))];
+    _lineView.backgroundColor = [UIColor lightGrayColor];
+    [_headerView addSubview:_lineView];
+
 }
 
 /** 设置 tableView */
@@ -81,8 +90,6 @@ NSString *const cellID = @"cellID";
     tableView.contentInset = UIEdgeInsetsMake(headerHeight, 0, 0, 0);
     // 设置滚动指示器边距
     tableView.scrollIndicatorInsets = tableView.contentInset;
-    // 取消自动布局
-    self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self.view addSubview:tableView];
 }
@@ -91,7 +98,18 @@ NSString *const cellID = @"cellID";
 
     // 滚动上下偏移量 向上: 正数  向下: 负数
     CGFloat offset = scrollView.contentOffset.y + scrollView.contentInset.top;
-    NSLog(@"%lf", offset);
+
+    // Y最小值
+    CGFloat minHeaderViewY = headerHeight - 64;
+
+    // 透明度
+    CGFloat progress = 1 - (offset / minHeaderViewY);
+    BOOL isHideen = progress > 0 ? true : false;
+
+
+    // 根据透明度显示导航栏
+    [self.navigationController setNavigationBarHidden:isHideen animated:NO];
+
 
     if (offset <= 0) { // 向下，放大
 
@@ -100,12 +118,21 @@ NSString *const cellID = @"cellID";
         _headerView.bs_height = headerHeight - offset;
         _headerImgView.bs_height = _headerView.bs_height;
 
-    }else { // 向上
+    }else { // 向上, 整体移动
 
+        // 整体移动
         _headerView.bs_height = headerHeight;
         _headerImgView.bs_height = _headerView.bs_height;
-        _headerView.bs_y = -offset;
+
+        // 设置 Y 最小值
+        _headerView.bs_y = -MIN(minHeaderViewY, offset); // 返回两个数中的最小值
+
+        // 设置 图像的透明度
+        _headerImgView.alpha = progress;
     }
+
+    // 设置分割线的位置
+    _lineView.bs_y = _headerView.bs_height - _lineView.bs_height;
 }
 
 #pragma mark - <代理方法>
