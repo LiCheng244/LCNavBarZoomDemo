@@ -22,7 +22,7 @@ NSString *const cellID = @"cellID";
     [super viewWillAppear:animated];
 
     // 隐藏导航条
-    self.navigationController.navigationBar.hidden = YES;
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewDidLoad {
@@ -32,6 +32,13 @@ NSString *const cellID = @"cellID";
 
     [self setupTableView];
     [self setupHeaderView];
+}
+
+/** 设置状态栏 样式 */
+-(UIStatusBarStyle)preferredStatusBarStyle {
+
+    // 亮色
+    return UIStatusBarStyleLightContent;
 }
 
 /** 设置 headerView */
@@ -67,7 +74,9 @@ NSString *const cellID = @"cellID";
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 100;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
 
     cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];

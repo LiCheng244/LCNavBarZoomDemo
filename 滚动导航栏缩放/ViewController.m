@@ -14,6 +14,12 @@
 
 @implementation ViewController
 
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.

@@ -12,7 +12,7 @@
         <!--滚动缩放效果-->
         <scene sceneID="c5y-du-AMw">
             <objects>
-                <tableViewController id="A2D-BS-KcO" sceneMemberID="viewController">
+                <tableViewController id="A2D-BS-KcO" customClass="ViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xmQ-5r-Pgx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
