@@ -7,6 +7,7 @@
 //
 
 #import "LCHeaderController.h"
+#import "UIView+BSFrame.h"
 
 NSString *const cellID = @"cellID";
 
@@ -16,7 +17,11 @@ NSString *const cellID = @"cellID";
 
 @end
 
-@implementation LCHeaderController
+@implementation LCHeaderController {
+
+    UIView *_headerView;
+    UIImageView *_headerImgView;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -44,10 +49,22 @@ NSString *const cellID = @"cellID";
 /** 设置 headerView */
 - (void)setupHeaderView {
 
-    UIView *headerView = [[UIView alloc] initWithFrame:(CGRectMake(0, 0, self.view.bounds.size.width, headerHeight))];
-    headerView.backgroundColor = [UIColor redColor];
+    _headerView = [[UIView alloc] initWithFrame:(CGRectMake(0, 0, self.view.bounds.size.width, headerHeight))];
+    _headerView.backgroundColor = [UIColor redColor];
 
-    [self.view addSubview:headerView];
+    [self.view addSubview:_headerView];
+
+    // 头像视图
+    _headerImgView = [[UIImageView alloc] initWithFrame:_headerView.bounds];
+    _headerImgView.image = [UIImage imageNamed:@"111.jpg"];
+    _headerImgView.backgroundColor = [UIColor grayColor];
+
+    // 设置图像缩放方式 - 等比例填充
+    _headerImgView.contentMode = UIViewContentModeScaleAspectFill;
+    // 设置图片剪裁
+//    _headerImgView.clipsToBounds = YES;
+
+    [_headerView addSubview:_headerImgView];
 }
 
 /** 设置 tableView */
@@ -70,7 +87,28 @@ NSString *const cellID = @"cellID";
     [self.view addSubview:tableView];
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
+    // 滚动上下偏移量 向上: 正数  向下: 负数
+    CGFloat offset = scrollView.contentOffset.y + scrollView.contentInset.top;
+    NSLog(@"%lf", offset);
+
+    if (offset <= 0) { // 向下，放大
+
+        // 调整 headerView 和 headerImgView的高度
+        _headerView.bs_y = 0;
+        _headerView.bs_height = headerHeight - offset;
+        _headerImgView.bs_height = _headerView.bs_height;
+
+    }else { // 向上
+
+        _headerView.bs_height = headerHeight;
+        _headerImgView.bs_height = _headerView.bs_height;
+        _headerView.bs_y = -offset;
+    }
+}
+
+#pragma mark - <代理方法>
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 100;
 }

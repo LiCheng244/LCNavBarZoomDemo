@@ -16,6 +16,9 @@
 		5A8042431E63EEC8007EF916 /* _______Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8042421E63EEC8007EF916 /* _______Tests.m */; };
 		5A80424E1E63EEC8007EF916 /* _______UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A80424D1E63EEC8007EF916 /* _______UITests.m */; };
 		5A80425D1E63EFF7007EF916 /* LCHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A80425C1E63EFF7007EF916 /* LCHeaderController.m */; };
+		5A80425F1E641DE4007EF916 /* 111.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5A80425E1E641DE4007EF916 /* 111.jpg */; };
+		5A8042621E6424BF007EF916 /* UIView+CZAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8042611E6424BF007EF916 /* UIView+CZAddition.m */; };
+		5A8042651E642503007EF916 /* UIView+BSFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8042641E642503007EF916 /* UIView+BSFrame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,11 @@
 		5A80424F1E63EEC8007EF916 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A80425B1E63EFF7007EF916 /* LCHeaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCHeaderController.h; sourceTree = "<group>"; };
 		5A80425C1E63EFF7007EF916 /* LCHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCHeaderController.m; sourceTree = "<group>"; };
+		5A80425E1E641DE4007EF916 /* 111.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 111.jpg; sourceTree = "<group>"; };
+		5A8042601E6424BF007EF916 /* UIView+CZAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CZAddition.h"; sourceTree = "<group>"; };
+		5A8042611E6424BF007EF916 /* UIView+CZAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CZAddition.m"; sourceTree = "<group>"; };
+		5A8042631E642503007EF916 /* UIView+BSFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BSFrame.h"; sourceTree = "<group>"; };
+		5A8042641E642503007EF916 /* UIView+BSFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BSFrame.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +112,11 @@
 		5A8042271E63EEC8007EF916 /* 滚动导航栏缩放 */ = {
 			isa = PBXGroup;
 			children = (
+				5A8042631E642503007EF916 /* UIView+BSFrame.h */,
+				5A8042641E642503007EF916 /* UIView+BSFrame.m */,
+				5A8042601E6424BF007EF916 /* UIView+CZAddition.h */,
+				5A8042611E6424BF007EF916 /* UIView+CZAddition.m */,
+				5A80425E1E641DE4007EF916 /* 111.jpg */,
 				5A80422B1E63EEC8007EF916 /* AppDelegate.h */,
 				5A80422C1E63EEC8007EF916 /* AppDelegate.m */,
 				5A80422E1E63EEC8007EF916 /* ViewController.h */,
@@ -257,6 +270,7 @@
 				5A8042381E63EEC8007EF916 /* LaunchScreen.storyboard in Resources */,
 				5A8042351E63EEC8007EF916 /* Assets.xcassets in Resources */,
 				5A8042331E63EEC8007EF916 /* Main.storyboard in Resources */,
+				5A80425F1E641DE4007EF916 /* 111.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,8 +296,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A8042301E63EEC8007EF916 /* ViewController.m in Sources */,
+				5A8042651E642503007EF916 /* UIView+BSFrame.m in Sources */,
 				5A80422D1E63EEC8007EF916 /* AppDelegate.m in Sources */,
 				5A80422A1E63EEC8007EF916 /* main.m in Sources */,
+				5A8042621E6424BF007EF916 /* UIView+CZAddition.m in Sources */,
 				5A80425D1E63EFF7007EF916 /* LCHeaderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,6 +538,7 @@
 				5A8042541E63EEC8007EF916 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5A8042551E63EEC8007EF916 /* Build configuration list for PBXNativeTarget "滚动导航栏缩放Tests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +547,7 @@
 				5A8042571E63EEC8007EF916 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5A8042581E63EEC8007EF916 /* Build configuration list for PBXNativeTarget "滚动导航栏缩放UITests" */ = {
 			isa = XCConfigurationList;
@@ -538,6 +556,7 @@
 				5A80425A1E63EEC8007EF916 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
