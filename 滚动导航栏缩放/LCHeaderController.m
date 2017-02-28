@@ -10,8 +10,8 @@
 #import "UIView+BSFrame.h"
 
 NSString *const cellID = @"cellID";
-
 #define headerHeight 200
+
 
 @interface LCHeaderController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -96,42 +96,41 @@ NSString *const cellID = @"cellID";
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
-    // 滚动上下偏移量 向上: 正数  向下: 负数
+    // 1. 滚动上下偏移量
+    //    - 向上: 正数  向下: 负数
     CGFloat offset = scrollView.contentOffset.y + scrollView.contentInset.top;
 
-    // Y最小值
+    // 2. 顶部视图 Y 最小值
     CGFloat minHeaderViewY = headerHeight - 64;
 
-    // 透明度
+    // 3. 顶部视图透明度
     CGFloat progress = 1 - (offset / minHeaderViewY);
+
+    // 4. 根据透明度显示导航栏
     BOOL isHideen = progress > 0 ? true : false;
-
-
-    // 根据透明度显示导航栏
     [self.navigationController setNavigationBarHidden:isHideen animated:NO];
 
-
+    // 5. 判断滚动方向
     if (offset <= 0) { // 向下，放大
 
-        // 调整 headerView 和 headerImgView的高度
+        // 调整 headerView 布局
         _headerView.bs_y = 0;
         _headerView.bs_height = headerHeight - offset;
-        _headerImgView.bs_height = _headerView.bs_height;
 
     }else { // 向上, 整体移动
 
         // 整体移动
-        _headerView.bs_height = headerHeight;
-        _headerImgView.bs_height = _headerView.bs_height;
-
-        // 设置 Y 最小值
         _headerView.bs_y = -MIN(minHeaderViewY, offset); // 返回两个数中的最小值
+        _headerView.bs_height = headerHeight;
 
         // 设置 图像的透明度
         _headerImgView.alpha = progress;
     }
 
-    // 设置分割线的位置
+    // 6. 调整 图像视图 高度
+    _headerImgView.bs_height = _headerView.bs_height;
+
+    // 7. 设置分割线的位置
     _lineView.bs_y = _headerView.bs_height - _lineView.bs_height;
 }
 
